@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Save The Date</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f7f2e8;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    overflow:hidden;
+    font-family:'Cormorant Garamond', serif;
+}
+
+/* CARD */
+
+.card{
+    width:100%;
+    max-width:390px;
+    min-height:760px;
+    background:#fcfaf5;
+    position:relative;
+    overflow:hidden;
+    border-radius:24px;
+    box-shadow:0 18px 45px rgba(0,0,0,0.16);
+    padding:42px 24px;
+    text-align:center;
+}
+
+/* SAVE TEXT */
+
+.save{
+    font-size:clamp(40px,8vw,56px);
+    color:#cdb164;
+    font-style:italic;
+    font-weight:200;
+    margin-top:20px;
+    letter-spacing:1px;
+    line-height:1.1;
+}
+
+/* NAMES */
+
+.names{
+    margin-top:20px;
+    font-size:clamp(32px,7vw,42px);
+    color:#111;
+    font-weight:300;
+    line-height:1.2;
+}
+
+.names span{
+    color:#d2b76a;
+    padding:0 8px;
+}
+
+/* SCRATCH TEXT */
+
+.scratch-text{
+    margin-top:14px;
+    letter-spacing:4px;
+    color:#cdb164;
+    font-size:13px;
+}
+
+/* HEART WRAP */
+
+.heart-wrap{
+    margin-top:28px;
+    position:relative;
+    width:90%;
+    max-width:300px;
+    aspect-ratio:1/1;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* INVITATION HEART */
+
+.invitation-heart{
+    position:absolute;
+    inset:0;
+    background:#f9f2df;
+    clip-path:path("M150 280 C150 280 10 180 10 90 C10 20 80 0 150 60 C220 0 290 20 290 90 C290 180 150 280 150 280 Z");
+    border:1px solid #d8bf79;
+    z-index:1;
+}
+
+/* INVITATION CONTENT */
+
+.invite-text{
+    position:absolute;
+    top:90px;
+    left:50%;
+    transform:translateX(-50%);
+    width:220px;
+    z-index:2;
+    color:#6d6d6d;
+}
+
+.invite-text h4{
+    font-size:16px;
+    font-weight:400;
+    line-height:1.5;
+}
+
+.invite-text h2{
+    margin-top:16px;
+    font-size:26px;
+    color:#111;
+    font-weight:600;
+    line-height:1.2;
+}
+
+/* SCRATCH HEART */
+
+#scratch{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:5;
+    cursor:pointer;
+    touch-action:none;
+}
+
+/* LOCATION */
+
+.location{
+    margin-top:28px;
+    color:#111;
+    font-size:24px;
+    font-style:italic;
+    line-height:1.4;
+    padding:0 10px;
+}
+
+/* BOTTOM */
+
+.bottom{
+    margin-top:14px;
+    letter-spacing:4px;
+    color:#cdb164;
+    font-size:11px;
+}
+
+/* GOLD PARTICLES */
+
+.particle{
+    position:absolute;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:gold;
+    pointer-events:none;
+    animation:explode 1.6s ease-out forwards;
+    z-index:20;
+}
+
+@keyframes explode{
+
+    0%{
+        transform:translate(0,0) scale(1);
+        opacity:1;
+    }
+
+    100%{
+        transform:translate(var(--x), var(--y)) scale(0);
+        opacity:0;
+    }
+}
+
+/* FLOATING SPARKLES */
+
+.sparkle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:#e7cf85;
+    opacity:0.5;
+    animation:float 6s infinite ease-in-out;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-14px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+/* MUSIC BUTTON */
+
+.music-toggle{
+    position:absolute;
+    top:20px;
+    right:20px;
+    z-index:100;
+}
+
+.music-btn{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    border:none;
+    background:#cdb164;
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 8px 18px rgba(0,0,0,0.15);
+    transition:0.3s ease;
+    font-family:'Playfair Display', serif;
+}
+
+.music-btn:hover{
+    transform:scale(1.06);
+}
+
+.music-btn.muted{
+    background:#cdb164;
+}
+
+/* MOBILE */
+
+@media(max-width:400px){
+
+    .card{
+        min-height:auto;
+        padding:36px 20px 40px;
+    }
+
+    .invite-text{
+        width:190px;
+        top:80px;
+    }
+
+    .invite-text h4{
+        font-size:14px;
+    }
+
+    .invite-text h2{
+        font-size:22px;
+    }
+
+    .location{
+        font-size:20px;
+    }
+
+    .bottom{
+        letter-spacing:3px;
+        font-size:10px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <!-- MUSIC BUTTON -->
+
+    <div class="music-toggle">
+        <button class="music-btn" id="musicBtn">
+            ♪
+        </button>
+    </div>
+
+    <!-- TITLE -->
+
+    <div class="save">
+        Save the Date
+    </div>
+
+    <!-- NAMES -->
+
+    <div class="names">
+        Rohan <span>&</span> Aditi
+    </div>
+
+    <div class="scratch-text">
+        SCRATCH TO REVEAL
+    </div>
+
+    <!-- HEART -->
+
+    <div class="heart-wrap">
+
+        <!-- INVITATION HEART -->
+
+        <div class="invitation-heart"></div>
+
+        <!-- INVITATION TEXT -->
+
+        <div class="invite-text">
+            <h4>
+                We invite you to celebrate our wedding on
+            </h4>
+
+            <h2>
+                20 June 2026
+            </h2>
+        </div>
+
+        <!-- SCRATCH CANVAS -->
+
+        <canvas id="scratch"></canvas>
+
+    </div>
+
+    <!-- LOCATION -->
+
+    <div class="location">
+        Venue : Roche Harbor, Ramgarh
+    </div>
+
+    <!-- BOTTOM -->
+
+    <div class="bottom">
+        FORMAL INVITATION TO FOLLOW
+    </div>
+
+</div>
+
+<!-- AUDIO -->
+
+<audio id="bgmusic" loop autoplay muted playsinline>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* CANVAS */
+
+const canvas = document.getElementById("scratch");
+const ctx = canvas.getContext("2d");
+
+const wrapper = document.querySelector(".heart-wrap");
+
+canvas.width = wrapper.offsetWidth;
+canvas.height = wrapper.offsetHeight;
+
+/* HEART SHAPE */
+
+ctx.save();
+
+ctx.beginPath();
+
+ctx.moveTo(150,280);
+
+ctx.bezierCurveTo(150,280,10,180,10,90);
+ctx.bezierCurveTo(10,20,80,0,150,60);
+ctx.bezierCurveTo(220,0,290,20,290,90);
+ctx.bezierCurveTo(290,180,150,280,150,280);
+
+ctx.closePath();
+
+ctx.clip();
+
+/* GOLD LAYER */
+
+const goldGradient = ctx.createLinearGradient(0,0,300,300);
+
+goldGradient.addColorStop(0,"#f4e4a3");
+goldGradient.addColorStop(0.5,"#d6b35e");
+goldGradient.addColorStop(1,"#fff0b5");
+
+ctx.fillStyle = goldGradient;
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.restore();
+
+/* SCRATCH EFFECT */
+
+ctx.globalCompositeOperation = "destination-out";
+
+let isDrawing = false;
+let musicStarted = false;
+
+function getPosition(e){
+
+    const rect = canvas.getBoundingClientRect();
+
+    if(e.touches){
+
+        return{
+            x:e.touches[0].clientX - rect.left,
+            y:e.touches[0].clientY - rect.top
+        };
+    }
+
+    return{
+        x:e.clientX - rect.left,
+        y:e.clientY - rect.top
+    };
+}
+
+const music = document.getElementById("bgmusic");
+window.addEventListener("load", ()=>{
+
+    music.muted = false;
+
+    music.play()
+    .then(()=>{
+
+        musicBtn.innerHTML = "♪";
+
+    })
+    .catch(()=>{});
+});
+
+function startMusic(){
+
+    if(!musicStarted){
+
+        music.play()
+        .then(()=>{
+
+            musicBtn.innerHTML = "♪";
+            musicBtn.classList.remove("muted");
+
+        })
+        .catch(()=>{});
+
+        musicStarted = true;
+    }
+}
+
+function scratch(e){
+
+    if(!isDrawing) return;
+
+    e.preventDefault();
+
+    startMusic();
+
+    const pos = getPosition(e);
+
+    ctx.beginPath();
+    ctx.arc(pos.x,pos.y,24,0,Math.PI*2);
+    ctx.fill();
+
+    createParticles(pos.x,pos.y);
+}
+
+/* EVENTS */
+
+canvas.addEventListener("mousedown", ()=> {
+    isDrawing=true;
+    startMusic();
+});
+
+canvas.addEventListener("mouseup", ()=> isDrawing=false);
+
+canvas.addEventListener("mouseleave", ()=> isDrawing=false);
+
+canvas.addEventListener("mousemove", scratch);
+
+canvas.addEventListener("touchstart", ()=> {
+    isDrawing=true;
+    startMusic();
+});
+
+canvas.addEventListener("touchend", ()=> isDrawing=false);
+
+canvas.addEventListener("touchmove", scratch);
+
+/* PARTICLES */
+
+function createParticles(x,y){
+
+    for(let i=0;i<12;i++){
+
+        const particle = document.createElement("div");
+
+        particle.classList.add("particle");
+
+        particle.style.left = x + "px";
+        particle.style.top = y + "px";
+
+        particle.style.setProperty(
+            "--x",
+            (Math.random()*240 - 120) + "px"
+        );
+
+        particle.style.setProperty(
+            "--y",
+            (Math.random()*240 - 120) + "px"
+        );
+
+        wrapper.appendChild(particle);
+
+        setTimeout(()=>{
+            particle.remove();
+        },1600);
+    }
+}
+
+/* FLOATING SPARKLES */
+
+for(let i=0;i<25;i++){
+
+    const sparkle = document.createElement("div");
+
+    sparkle.classList.add("sparkle");
+
+    sparkle.style.left = Math.random()*100 + "%";
+    sparkle.style.top = Math.random()*100 + "%";
+
+    sparkle.style.animationDuration =
+        (Math.random()*4 + 4) + "s";
+
+    document.querySelector(".card")
+        .appendChild(sparkle);
+}
+
+/* MUSIC TOGGLE */
+
+musicBtn.addEventListener("click", ()=>{
+
+    if(music.paused){
+
+        music.play();
+
+        musicBtn.innerHTML = "♪";
+        musicBtn.classList.remove("muted");
+
+    }else{
+
+        music.pause();
+
+        musicBtn.innerHTML = "/";
+        musicBtn.classList.add("muted");
+    }
+});
+
+</script>
+
+</body>
+</html>
