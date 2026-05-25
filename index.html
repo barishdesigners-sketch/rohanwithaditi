@@ -617,13 +617,8 @@ function startMusicOnce(){
     music.play();
 
     musicBtn.classList.remove("paused");
-
-    document.body.removeEventListener(
-        "click",
-        startMusicOnce
-    );
-}
-
+    }
+    
 /* TOGGLE MUSIC */
 
 musicBtn.addEventListener("click", () => {
